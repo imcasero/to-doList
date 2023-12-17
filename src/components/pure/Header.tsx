@@ -1,19 +1,25 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import style from "../../style/header.module.css";
+import { useState, ChangeEvent, FormEvent } from "react";
+import * as PropTypes from 'prop-types';
+import style from '../../style/header.module.css';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import todoLogo from "../../assets/todoLogo.svg";
 
-function Header({ onAddTask }) {
-  const [title, setTitle] = useState("");
+interface HeaderProps {
+  onAddTask: (taskTitle: string) => void;
+}
 
-  function handleSubmit(event) {
+function Header({ onAddTask }: HeaderProps): JSX.Element {
+  const [title, setTitle] = useState<string>("");
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    onAddTask(title);
-    setTitle("");
+    if (title) {
+      onAddTask(title);
+      setTitle("");
+    }
   }
 
-  function onChangeTitle(event) {
+  function onChangeTitle(event: ChangeEvent<HTMLInputElement>): void {
     setTitle(event.target.value);
   }
 
@@ -42,3 +48,4 @@ Header.propTypes = {
 };
 
 export default Header;
+

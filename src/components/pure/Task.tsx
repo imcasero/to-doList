@@ -1,9 +1,20 @@
-import PropTypes from "prop-types";
+import * as PropTypes from 'prop-types';
+
 import style from "../../style/task.module.css";
 import { TbTrash } from "react-icons/tb";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
-function Task({ task, onComplete, onDelete }) {
+interface TaskProps {
+  task: {
+    id: string;
+    title: string;
+    isCompleted: boolean;
+  };
+  onComplete: (taskId: string) => void;
+  onDelete: (taskId: string) => void;
+}
+
+function Task({ task, onComplete, onDelete }: TaskProps): JSX.Element {
   return (
     <div className={style.task}>
       <button
