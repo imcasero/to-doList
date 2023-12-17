@@ -9,8 +9,10 @@ function Header({ onAddTask }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onAddTask(title);
-    setTitle("");
+    if(title){
+      onAddTask(title);
+      setTitle("");
+    }
   }
 
   function onChangeTitle(event) {
